@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "00_basics_compile"
+		},
+		{
+			"path": "01_makefile_compile"
+		},
+		{
+			"name": "learn_cpp",
+			"path": "."
+		}
+	],
+	"settings": {}
+}

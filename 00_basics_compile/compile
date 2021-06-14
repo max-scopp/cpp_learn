@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+# clang++ main.cpp # results in:
+# /usr/bin/ld: /tmp/main-6066d4.o: in function `main':
+# main.cpp:(.text+0x2d): undefined reference to `MakeItRain()'
+# /usr/bin/ld: main.cpp:(.text+0x32): undefined reference to `MakeItSunny()'
+# clang: error: linker command failed with exit code 1 (use -v to see invocation)
+
+# compile library with c++17 target (don't forget the "-c"!)
+c++ -std=c++17 -c tools.cpp -o tools.o
+
+# demangle compiled library
+# nm -gC tools.o
+
+# create an archive of multiple library files
+ar rcs libtools.a tools.o
+
+# compile again, but this time, tell the linker where to
+# find the symbols.
+# "-L" is the base path to look
+# -ltools means to look for library "tools"
+# then, compile to main.o
+c++ -std=c++17 main.cpp -L . -ltools -o main
+
+# DONE! Run with "./main"
